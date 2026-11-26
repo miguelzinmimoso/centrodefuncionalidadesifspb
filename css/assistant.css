@@ -1,0 +1,61 @@
+.theme-toggle { border: 1px solid rgba(128,128,128,.3); background: transparent; border-radius: 50px; width: 40px; height: 40px; font-size: 1.05rem; cursor: pointer; transition: transform .25s ease; }
+.theme-toggle:hover { transform: rotate(18deg) scale(1.08); }
+.theme-toggle.floating { position: fixed; top: 1rem; right: 1rem; z-index: 90; }
+.back-to-top { bottom: 5.6rem !important; }
+
+.ai-fab { position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 95; display: flex; align-items: center; gap: .5rem; border: 0; cursor: pointer; background: linear-gradient(135deg, #198754, #0f3d24); color: #fff; font: 700 .92rem 'Plus Jakarta Sans', Roboto, sans-serif; padding: .85rem 1.2rem; border-radius: 50px; box-shadow: 0 14px 30px rgba(15,61,36,.38); transition: transform .25s ease; }
+.ai-fab:hover { transform: translateY(-3px); }
+.ai-panel { position: fixed; right: 1.25rem; bottom: 5.4rem; z-index: 96; width: min(390px, calc(100vw - 1.5rem)); height: min(560px, calc(100vh - 7rem)); display: none; flex-direction: column; background: #fff; color: #0f172a; border: 1px solid rgba(15,23,42,.1); border-radius: 20px; overflow: hidden; box-shadow: 0 28px 60px rgba(0,0,0,.28); font-family: 'Plus Jakarta Sans', Roboto, sans-serif; }
+.ai-panel.open { display: flex; animation: ai-pop .28s cubic-bezier(.16,1,.3,1); }
+@keyframes ai-pop { from { opacity: 0; transform: translateY(14px) scale(.97); } }
+.ai-head { display: flex; align-items: center; justify-content: space-between; gap: .6rem; padding: .9rem 1rem; background: linear-gradient(135deg, #198754, #0f3d24); color: #fff; }
+.ai-head strong { display: block; font-size: .98rem; }
+.ai-head small { opacity: .85; font-size: .74rem; }
+.ai-head button { border: 0; background: rgba(255,255,255,.16); color: #fff; border-radius: 10px; padding: .4rem .6rem; cursor: pointer; font-size: .8rem; }
+.ai-log { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: .7rem; background: #f4f7f6; }
+.ai-msg { max-width: 88%; padding: .65rem .9rem; border-radius: 16px; font-size: .9rem; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word; }
+.ai-msg.bot { align-self: flex-start; background: #fff; border: 1px solid rgba(15,23,42,.08); border-bottom-left-radius: 4px; }
+.ai-msg.user { align-self: flex-end; background: #198754; color: #fff; border-bottom-right-radius: 4px; }
+.ai-actions { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .55rem; }
+.ai-actions a, .ai-actions button, .ai-chip { font: 600 .78rem inherit; font-family: inherit; border: 1px solid #198754; color: #0f3d24; background: #f0fdf4; border-radius: 50px; padding: .35rem .75rem; cursor: pointer; text-decoration: none; }
+.ai-actions a:hover, .ai-actions button:hover, .ai-chip:hover { background: #198754; color: #fff; }
+.ai-typing { align-self: flex-start; display: flex; gap: 4px; padding: .7rem .9rem; background: #fff; border-radius: 16px; }
+.ai-typing i { width: 7px; height: 7px; border-radius: 50%; background: #198754; animation: ai-dot 1s infinite; }
+.ai-typing i:nth-child(2) { animation-delay: .15s; } .ai-typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes ai-dot { 0%, 60%, 100% { opacity: .25; transform: none; } 30% { opacity: 1; transform: translateY(-4px); } }
+.ai-chips { display: flex; gap: .4rem; overflow-x: auto; padding: .6rem .8rem 0; background: #fff; }
+.ai-chip { white-space: nowrap; flex: none; }
+.ai-form { display: flex; gap: .5rem; padding: .7rem .8rem; background: #fff; }
+.ai-form input { flex: 1; border: 1px solid rgba(15,23,42,.15); border-radius: 50px; padding: .6rem 1rem; font: inherit; font-size: .9rem; min-width: 0; }
+.ai-form button { border: 0; background: #198754; color: #fff; border-radius: 50px; padding: 0 1.1rem; font-weight: 700; cursor: pointer; }
+.ai-note { font-size: .68rem; color: #64748b; text-align: center; padding: 0 .8rem .6rem; background: #fff; }
+.ai-timer { display: none; padding: .45rem 1rem; font-size: .8rem; font-weight: 700; background: #fef9c3; color: #713f12; }
+.ai-timer.on { display: block; }
+
+.pal-back { position: fixed; inset: 0; z-index: 200; display: none; align-items: flex-start; justify-content: center; padding-top: 14vh; background: rgba(0,0,0,.45); }
+.pal-back.open { display: flex; }
+.pal { width: min(540px, calc(100vw - 2rem)); background: #fff; color: #0f172a; border-radius: 16px; overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,.35); font-family: 'Plus Jakarta Sans', Roboto, sans-serif; }
+.pal input { width: 100%; border: 0; border-bottom: 1px solid rgba(15,23,42,.1); padding: 1rem 1.2rem; font: inherit; font-size: 1rem; outline: none; background: transparent; color: inherit; }
+.pal ul { list-style: none; max-height: 320px; overflow-y: auto; padding: .4rem; }
+.pal li { padding: .65rem .9rem; border-radius: 10px; cursor: pointer; font-size: .92rem; }
+.pal li.sel, .pal li:hover { background: #198754; color: #fff; }
+.pal small { display: block; padding: .5rem 1rem .7rem; color: #64748b; font-size: .72rem; }
+
+html[data-theme="dark"] .ai-panel, html[data-theme="dark"] .pal, html[data-theme="dark"] .ai-chips, html[data-theme="dark"] .ai-form, html[data-theme="dark"] .ai-note { background: #16211b; color: #e8f0ec; border-color: rgba(255,255,255,.1); }
+html[data-theme="dark"] .ai-log { background: #0e1512; }
+html[data-theme="dark"] .ai-msg.bot, html[data-theme="dark"] .ai-typing { background: #1d2c24; color: #e8f0ec; border-color: rgba(255,255,255,.08); }
+html[data-theme="dark"] .ai-actions a, html[data-theme="dark"] .ai-actions button, html[data-theme="dark"] .ai-chip { background: #1d2c24; color: #86efac; border-color: #22c55e; }
+html[data-theme="dark"] .ai-form input { background: #101a15; color: #e8f0ec; border-color: #2c3b33; }
+html[data-theme="dark"] .feature { background: #16211b; border-color: rgba(255,255,255,.1); }
+html[data-theme="dark"] .feature p, html[data-theme="dark"] .features > p, html[data-theme="dark"] .greeting span { color: #a9b8b0; }
+html[data-theme="dark"] .greeting strong { color: #86efac; }
+@media (max-width: 480px) { .ai-fab span { display: none; } }
+
+html[data-theme="dark"] .pw-toggle, html[data-theme="dark"] .ai-head + * .x { color: #4ade80; }
+html[data-theme="dark"] .pw-toggle:hover { background: rgba(74,222,128,.14); }
+
+/* Logo do cabeçalho do painel: sem fundo extra no modo escuro. */
+html[data-theme="dark"] .navbar-header .logo { background: transparent; border-top: 0; border-bottom: 0; border-left: 0; }
+
+/* A logo do cabeçalho verde não recebe o fundo escuro do modo escuro (evita o "retângulo" atrás dela). */
+html[data-theme="dark"] .navbar-header .logo { background: transparent; border-top-color: transparent; border-bottom-color: transparent; border-left-color: transparent; box-shadow: none; backdrop-filter: none; }

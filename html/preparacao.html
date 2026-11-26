@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <script src="../JS/theme.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f3d24">
+  <title>Preparação para Provas - Centro de Funcionalidades</title>
+  <link rel="icon" type="image/png" href="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Instituto_Federal_da_Para%C3%ADba_-_Marca_Vertical_2015.svg/1280px-Instituto_Federal_da_Para%C3%ADba_-_Marca_Vertical_2015.svg.png">
+  <link rel="stylesheet" href="../css/style-dashboard.css">
+  <link rel="stylesheet" href="../css/institutional.css">
+  <link rel="stylesheet" href="../css/style-preparacao.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/enhancements.css">
+  <link rel="stylesheet" href="../css/dark.css">
+  <link rel="stylesheet" href="../css/assistant.css">
+</head>
+<body class="prep-page">
+  <header class="navbar-header">
+    <nav class="navbar">
+      <div class="logo"><a href="../index.html">IFPB</a></div>
+      <ul class="nav-links">
+        <li><a class="nav-btn" id="back-dashboard" href="dashboard.html">Voltar ao painel</a></li>
+        <li><a class="nav-btn" href="medias.html">Cálculo de Médias</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="prep-main">
+    <section class="prep-hero">
+      <div class="prep-hero-copy">
+        <p class="prep-eyebrow">CENTRO DE FUNCIONALIDADES · IFPB</p>
+        <h1>Prepare-se para sua próxima prova.</h1>
+        <p>Organize os conteúdos, distribua seu tempo e acompanhe sua preparação até o dia da avaliação.</p>
+      </div>
+      <div class="prep-hero-icon" aria-hidden="true">📝</div>
+    </section>
+
+    <section class="prep-library prep-panel" aria-labelledby="library-title">
+      <div class="prep-library-heading">
+        <div><p class="prep-eyebrow">SEUS ESTUDOS</p><h2 id="library-title">Meus planejamentos</h2><p class="prep-muted">Organize mais de uma prova e continue de onde parou.</p></div>
+        <div class="prep-library-actions">
+          <button id="backup-button" class="prep-secondary-btn" type="button">↓ Baixar backup</button>
+          <button id="restore-button" class="prep-secondary-btn" type="button">↑ Restaurar backup</button>
+          <input id="restore-file" type="file" accept="application/json,.json" hidden>
+        </div>
+      </div>
+      <div id="plan-library" class="prep-plan-library" aria-live="polite"></div>
+    </section>
+
+    <section class="prep-layout" aria-label="Criar planejamento de estudos">
+      <form id="prep-form" class="prep-panel prep-form-panel">
+        <div class="prep-section-heading">
+          <div><span class="prep-step">01</span><div><p class="prep-eyebrow">NOVO PLANEJAMENTO</p><h2>Dados da avaliação</h2></div></div>
+        </div>
+        <label class="prep-field">Disciplina
+          <input id="prep-subject" type="text" maxlength="60" placeholder="Ex.: Biologia" required>
+        </label>
+        <div class="prep-fields-two">
+          <label class="prep-field">Data da prova
+            <input id="prep-date" type="date" required>
+          </label>
+          <label class="prep-field">Tempo por dia
+            <select id="prep-hours">
+              <option value="0.5">30 minutos</option>
+              <option value="1">1 hora</option>
+              <option value="1.5">1h30</option>
+              <option value="2" selected>2 horas</option>
+              <option value="2.5">2h30</option>
+              <option value="3">3 horas</option>
+              <option value="4">4 horas</option>
+              <option value="5">5 horas</option>
+              <option value="6">6 horas</option>
+            </select>
+          </label>
+        </div>
+        <div class="prep-content-heading">
+          <div><p class="prep-eyebrow">02 · CONTEÚDO</p><h2>O que vai cair na prova?</h2></div>
+          <span class="prep-hint">Adicione os assuntos</span>
+        </div>
+        <div id="prep-topics" class="prep-topics-list">
+          <div class="prep-topic-row">
+            <input class="prep-topic-name" type="text" maxlength="90" placeholder="Ex.: Citologia" aria-label="Nome do conteúdo" required>
+            <select class="prep-topic-level" aria-label="Dificuldade do conteúdo"><option value="1">Fácil</option><option value="2" selected>Médio</option><option value="3">Difícil</option></select>
+            <select class="prep-topic-knowledge" aria-label="Quanto você conhece do conteúdo"><option value="0">Não estudei</option><option value="1" selected>Sei um pouco</option><option value="2">Já domino</option></select>
+            <button class="prep-remove-topic" type="button" aria-label="Remover conteúdo" disabled>×</button>
+          </div>
+        </div>
+        <button id="add-topic" class="prep-add-topic" type="button">＋ Adicionar conteúdo</button>
+        <p class="prep-form-note">A dificuldade e seu nível de conhecimento ajudam a reservar mais tempo para os assuntos que precisam de atenção.</p>
+        <button id="prep-submit" class="prep-primary-btn" type="submit">Montar meu cronograma <span aria-hidden="true">→</span></button>
+        <button id="cancel-edit-button" class="prep-cancel-edit" type="button" hidden>Cancelar edição</button>
+        <p id="prep-form-message" class="prep-message" role="status" aria-live="polite"></p>
+      </form>
+
+      <aside class="prep-side-column">
+        <section class="prep-panel prep-how-panel">
+          <div class="prep-side-icon" aria-hidden="true">🧭</div>
+          <h2>Como funciona?</h2>
+          <ul>
+            <li>Informe a data e os assuntos da avaliação.</li>
+            <li>O sistema distribui os conteúdos conforme a dificuldade e o tempo disponível.</li>
+            <li>Marque cada sessão concluída para acompanhar seu avanço.</li>
+            <li>Reserve os últimos dias para revisão e prática.</li>
+          </ul>
+        </section>
+        <section class="prep-panel prep-tip-panel">
+          <span aria-hidden="true">💡</span>
+          <div><strong>Dica de estudo</strong><p>Estudar um pouco por dia e revisar os assuntos depois costuma ser mais eficiente do que deixar tudo para a véspera.</p></div>
+        </section>
+      </aside>
+    </section>
+
+    <section id="prep-results" class="prep-results" hidden>
+      <div class="prep-results-heading">
+        <div><p class="prep-eyebrow">SEUS PLANOS DE ESTUDOS</p><h2 id="plan-title">Meus cronogramas</h2><p id="plan-subtitle" class="prep-muted">Acompanhe várias provas ao mesmo tempo e minimize os planos que não precisa ver agora.</p></div>
+        <div class="prep-results-toolbar">
+          <button id="collapse-all-button" class="prep-secondary-btn" type="button">▴ Minimizar todos</button>
+          <button id="expand-all-button" class="prep-secondary-btn" type="button">▾ Expandir todos</button>
+          <button id="new-plan-button" class="prep-secondary-btn" type="button">＋ Novo planejamento</button>
+        </div>
+      </div>
+      <div id="prep-plans" class="prep-plans" aria-live="polite"></div>
+      <section class="prep-focus-panel prep-panel" aria-labelledby="focus-title">
+        <div class="prep-focus-copy"><p class="prep-eyebrow">HORA DE CONCENTRAR</p><h2 id="focus-title">Modo foco</h2><p>Faça uma sessão de estudo sem distrações. Ao terminar, descanse um pouco.</p><span id="focus-status" class="prep-focus-status" role="status" aria-live="polite">Pronto para começar</span></div>
+        <div class="prep-timer-wrap"><div class="prep-timer" aria-live="off"><span id="focus-time">25:00</span><small id="focus-mode-label">FOCO</small></div><div class="prep-timer-actions"><button id="focus-start" class="prep-primary-btn" type="button">Iniciar</button><button id="focus-reset" class="prep-secondary-btn" type="button">Reiniciar</button></div><button id="focus-switch" class="prep-focus-switch" type="button">Mudar para pausa de 5 min</button></div>
+      </section>
+    </section>
+
+    <p class="prep-storage-note"><span aria-hidden="true">🔒</span> Seus planejamentos ficam salvos neste navegador e não são enviados a um servidor.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-brand"><div class="footer-logo" aria-hidden="true">IFPB</div><div><strong>Instituto Federal da Paraíba</strong><p>Educação pública, gratuita e de qualidade.</p></div></div>
+      <div class="footer-details"><h2>Instituição</h2><p>Instituto Federal de Educação, Ciência e Tecnologia da Paraíba</p><p class="footer-location">Campus Santa Luzia — Santa Luzia, PB</p></div>
+      <div class="footer-portal"><h2>Portal institucional</h2><p>Conheça os cursos, serviços e informações oficiais do IFPB.</p><a href="https://www.ifpb.edu.br/" target="_blank" rel="noopener noreferrer">Acessar o portal do IFPB</a></div>
+    </div>
+    <div class="footer-bottom"><span>Centro de Funcionalidades</span><span>Projeto acadêmico de apoio à comunidade estudantil.</span></div>
+  </footer>
+  <script src="../JS/preparacao.js"></script>
+  <script src="../JS/enhancements.js" defer></script>
+  <script src="../JS/assistant.js" defer></script>
+</body>
+</html>
