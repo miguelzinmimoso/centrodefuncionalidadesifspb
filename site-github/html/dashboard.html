@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<!-- Página principal com os recursos disponíveis ao estudante. -->
+<html lang="pt-BR">
+<head>
+  <script src="../JS/theme.js"></script>
+  <!-- Metadados, título e folha de estilos do dashboard. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meus Estudos - IFPB</title>
+  <link rel="icon" type="image/png" href="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Instituto_Federal_da_Para%C3%ADba_-_Marca_Vertical_2015.svg/1280px-Instituto_Federal_da_Para%C3%ADba_-_Marca_Vertical_2015.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail">
+  <link rel="stylesheet" href="../css/style-dashboard.css">
+  <link rel="stylesheet" href="../css/institutional.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/enhancements.css">
+  <link rel="stylesheet" href="../css/dark.css">
+  <link rel="stylesheet" href="../css/assistant.css">
+</head>
+<body>
+
+  <!-- Barra fixa de navegação com atalhos internos e externos. -->
+  <header class="navbar-header">
+    <nav class="navbar">
+      <div class="logo">
+        <a href="../index.html">IFPB</a>
+      </div>
+
+      <!-- Cada item representa uma funcionalidade ou acesso rápido. -->
+      <ul class="nav-links">
+        <li><a href="medias.html" class="nav-btn">Cálculo de Médias</a></li>
+        <li><a href="#planner-panel" class="nav-btn">Planilha de Estudos</a></li>
+        <li><a href="preparacao.html?curso=informatica" class="nav-btn">Preparação para Provas</a></li>
+        <li><a href="../pdf/horarios.pdf" target="_blank" rel="noopener" class="nav-btn">Horários de Aulas</a></li>
+        <li><a href="https://estudante.ifpb.edu.br/cursos/?cidade=25&modalidade=&nome=&formacao=&nivel_formacao=&turno=&forma_acesso=" target="_blank" rel="noopener" class="nav-btn">Cursos do campus</a></li>
+        <li class="profile-nav-item"><button class="nav-btn" id="open-student-profile" type="button">Dados do aluno</button></li>
+
+        <li class="dropdown">
+          <button class="nav-btn dropbtn">Acessos Rápidos ▾</button>
+          <div class="dropdown-content">
+            <a href="https://suap.ifpb.edu.br" target="_blank" rel="noopener">Acesso SUAP</a>
+            <a href="https://presencial.ifpb.edu.br/login/index.php" target="_blank" rel="noopener">Acesso Moodle</a>
+            <a href="https://classroom.google.com" target="_blank" rel="noopener">Google Sala de Aula</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Painel central de organização e acesso rápido ao estudo. -->
+  <main class="main-content">
+    <div class="content-shell">
+      <section class="overview-panel">
+        <!-- Formulário do plano diário; os IDs conectam seus campos aos eventos do dashboard.js. -->
+        <div class="daily-goals-wrap">
+          <p class="eyebrow">PLANO DE HOJE</p>
+          <h1>Como será seu dia de estudos?</h1>
+          <p class="overview-intro">Defina seu ritmo, anote a próxima prova e escolha um foco para hoje.</p>
+
+          <form id="daily-goals-form" class="daily-goals-form">
+            <div class="daily-form-row">
+              <label class="form-field" for="daily-hours-input">
+                <span>Horas de estudo por dia</span>
+                <input id="daily-hours-input" type="number" min="0.5" max="24" step="0.5" placeholder="Ex.: 2" required>
+              </label>
+              <label class="form-field" for="daily-exam-subject">
+                <span>Matéria da próxima prova</span>
+                <input id="daily-exam-subject" type="text" maxlength="40" placeholder="Ex.: Biologia">
+              </label>
+            </div>
+            <label class="form-field" for="daily-exam-date">
+              <span>Quando será a prova?</span>
+              <input id="daily-exam-date" type="date">
+            </label>
+            <label class="form-field" for="daily-goal-input">
+              <span>Qual é o seu foco para hoje?</span>
+              <textarea id="daily-goal-input" rows="2" maxlength="200" placeholder="Ex.: revisar genética e resolver uma lista de exercícios."></textarea>
+            </label>
+            <button type="submit">Salvar plano de hoje</button>
+          </form>
+
+          <ul id="daily-goals-list" class="daily-goals-list" aria-live="polite"></ul>
+        </div>
+
+        <!-- Valores atualizados pelo JavaScript após carregar ou alterar os dados do navegador. -->
+        <div class="overview-stats">
+          <p class="summary-heading">Seu resumo</p>
+          <div class="stat-box">
+            <span>Seu ritmo</span>
+            <strong id="daily-hours-value">Não informada</strong>
+            <small>de estudo por dia</small>
+          </div>
+          <div class="stat-box">
+            <span>Próxima prova</span>
+            <strong id="next-exam-value">Não informada</strong>
+            <small id="next-exam-subject">Informe os dados ou cadastre no planner</small>
+          </div>
+          <div class="stat-box">
+            <span>Tarefas pendentes</span>
+            <strong id="pending-tasks-value">0</strong>
+            <small>no seu planner</small>
+          </div>
+        </div>
+      </section>
+
+      <!-- Resumos derivados das tarefas: agenda e percentual concluído. -->
+      <section class="utility-panel">
+        <article class="mini-card agenda-card">
+          <div class="mini-card-header">
+            <h2>Agenda do dia</h2>
+            <span>Hoje</span>
+          </div>
+          <ul id="agenda-list"></ul>
+        </article>
+
+        <article class="mini-card focus-card">
+          <div class="mini-card-header">
+            <h2>Foco do momento</h2>
+            <span>Meta</span>
+          </div>
+          <div class="progress-block">
+            <div class="progress-label">
+              <span>Progresso semanal</span>
+              <strong id="progress-percent">0%</strong>
+            </div>
+            <div class="progress-bar">
+              <span id="progress-bar-fill"></span>
+            </div>
+          </div>
+          <p id="progress-message">Comece adicionando suas primeiras tarefas de estudo.</p>
+        </article>
+      </section>
+
+      <section class="prep-overview-panel" aria-labelledby="prep-overview-title">
+        <div class="prep-overview-heading">
+          <div><p class="eyebrow">PREPARAÇÃO PARA PROVAS</p><h2 id="prep-overview-title">Acompanhe sua próxima avaliação</h2><p>Veja seu cronograma e continue sua preparação sem perder o ritmo.</p></div>
+          <a href="preparacao.html?curso=informatica" class="prep-overview-link">Abrir preparação <span aria-hidden="true">→</span></a>
+        </div>
+        <div id="prep-overview-content" class="prep-overview-content" aria-live="polite"><p>Carregando seus planejamentos...</p></div>
+      </section>
+
+      <!-- Planner local: tipo Prova exige data; as tarefas são exibidas na lista abaixo. -->
+      <section id="planner-panel" class="planner-panel">
+        <div class="planner-header">
+          <div>
+            <p class="eyebrow">Planilha de estudos</p>
+            <h2>Organize sua rotina</h2>
+          </div>
+          <a href="https://docs.google.com/spreadsheets/create?usp=drive_web" target="_blank" rel="noopener" class="sheet-btn">Abrir Google Sheets</a>
+        </div>
+
+        <form id="study-form" class="study-form">
+          <input id="task-title" type="text" placeholder="Título da tarefa" maxlength="80" required>
+          <input id="task-subject" type="text" placeholder="Matéria" maxlength="40">
+          <input id="task-date" type="date">
+          <select id="task-type" aria-label="Tipo de atividade">
+            <option value="study">Estudo</option>
+            <option value="exam">Prova</option>
+          </select>
+          <button type="submit">Adicionar</button>
+        </form>
+
+        <div class="planner-list-header">
+          <span>Tarefas</span>
+          <span>Salvas localmente</span>
+        </div>
+
+        <div id="planner-list" class="planner-list" aria-live="polite"></div>
+      </section>
+
+      <!-- Atalhos para ferramentas internas, documentos do curso e serviços externos. -->
+      <div class="grid-container">
+
+        <a href="medias.html" class="card">
+          <span class="card-icon" aria-hidden="true">🧮</span>
+          <h3>Cálculo de Médias</h3>
+        </a>
+
+        <a href="https://docs.google.com/spreadsheets/create?usp=drive_web" target="_blank" rel="noopener" class="card">
+          <span class="card-icon" aria-hidden="true">📋</span>
+          <h3>Planilha de Estudos</h3>
+        </a>
+
+        <a href="preparacao.html?curso=informatica" class="card">
+          <span class="card-icon" aria-hidden="true">📝</span>
+          <h3>Preparação para Provas</h3>
+        </a>
+
+        <a href="../pdf/horarios.pdf" target="_blank" rel="noopener" class="card">
+          <span class="card-icon" aria-hidden="true">🕒</span>
+          <h3>Horários de aulas e de núcleos</h3>
+        </a>
+
+        <a href="https://estudante.ifpb.edu.br/cursos/?cidade=25&modalidade=&nome=&formacao=&nivel_formacao=&turno=&forma_acesso=" target="_blank" rel="noopener" class="card">
+          <span class="card-icon" aria-hidden="true">🎓</span>
+          <h3>Cursos do campus</h3>
+        </a>
+
+        <a href="https://suap.ifpb.edu.br" target="_blank" rel="noopener" class="card">
+          <span class="card-icon card-icon-text suap" aria-hidden="true"><span style="color:#1a5d2c">S</span><span style="color:#d32f2f">U</span><span style="color:#1a5d2c">A</span><span style="color:#d32f2f">P</span></span>
+          <h3>Acesso SUAP</h3>
+        </a>
+
+        <a href="https://presencial.ifpb.edu.br/login/index.php" target="_blank" rel="noopener" class="card">
+          <span class="card-icon card-icon-text moodle" aria-hidden="true">m</span>
+          <h3>Acesso Moodle</h3>
+        </a>
+
+        <a href="https://classroom.google.com" target="_blank" rel="noopener" class="card">
+          <span class="card-icon" aria-hidden="true">📚</span>
+          <h3>Google Sala de Aula</h3>
+        </a>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Diálogo modal: dashboard.js preenche os dados e controla abrir, fechar e sair da conta. -->
+  <dialog id="student-profile-dialog" class="profile-dialog" aria-labelledby="profile-dialog-title">
+    <section class="profile-content">
+      <button class="profile-close" id="close-student-profile" type="button" aria-label="Fechar">×</button>
+      <div class="profile-heading">
+        <div class="profile-avatar">
+          <img id="profile-photo" alt="Foto do aluno" hidden>
+          <span id="profile-initials" aria-hidden="true">IF</span>
+        </div>
+        <div>
+          <p class="eyebrow">Perfil do estudante</p>
+          <h2 id="profile-dialog-title">Dados do aluno</h2>
+          <p id="profile-empty-message" class="profile-empty" hidden>Sem informações do aluno.</p>
+        </div>
+      </div>
+      <dl class="profile-details">
+        <div><dt>Nome completo</dt><dd id="profile-name">Não informado</dd></div>
+        <div><dt>Matrícula</dt><dd id="profile-enrollment">Não informada</dd></div>
+        <div><dt>Curso</dt><dd id="profile-course">Não informado</dd></div>
+        <div><dt>E-mail</dt><dd id="profile-email">Não informado</dd></div>
+        <div><dt>Data de nascimento</dt><dd id="profile-birth-date">Não informada</dd></div>
+      </dl>
+      <a class="profile-edit-link" href="cadastro.html?curso=informatica">Editar dados do aluno</a>
+      <button class="profile-logout" id="logout-account" type="button" hidden>Sair da conta</button>
+    </section>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="footer-logo" aria-hidden="true">IFPB</div>
+        <div><strong>Instituto Federal da Paraíba</strong><p>Educação pública, gratuita e de qualidade.</p></div>
+      </div>
+      <div class="footer-details">
+        <h2>Instituição</h2>
+        <p>Instituto Federal de Educação, Ciência e Tecnologia da Paraíba</p>
+        <p class="footer-location">Campus Santa Luzia — Santa Luzia, PB</p>
+      </div>
+      <div class="footer-portal">
+        <h2>Portal institucional</h2>
+        <p>Conheça os cursos, serviços e informações oficiais do IFPB.</p>
+        <a href="https://www.ifpb.edu.br/" target="_blank" rel="noopener noreferrer">Acessar o portal do IFPB</a>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>Centro de Funcionalidades</span><span>Projeto acadêmico de apoio à comunidade estudantil.</span></div>
+  </footer>
+
+  <!-- Inicializa listas, estatísticas, eventos dos formulários e diálogo de perfil. -->
+  <script src="../JS/dashboard.js"></script>
+  <script src="../JS/prep-overview.js"></script>
+  <script src="../JS/enhancements.js" defer></script>
+  <script src="../JS/assistant.js" defer></script>
+</body>
+</html>

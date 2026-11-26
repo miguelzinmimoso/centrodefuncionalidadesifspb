@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!-- Página inicial: oferece a entrada para cada curso. -->
+<html lang="pt-BR">
+<head>
+  <script src="JS/theme.js"></script>
+  <!-- Configurações de codificação, escala móvel, título e recursos visuais externos. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ferramentas acadêmicas do IFPB Campus Santa Luzia para cálculo de médias, preparação de provas, planilhas e horários.">
+  <meta name="theme-color" content="#198754">
+  <title>Centro de Funcionalidades - IFPB</title>
+  <link rel="icon" type="image/png" href="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Instituto_Federal_da_Para%C3%ADba_-_Marca_Vertical_2015.svg/1280px-Instituto_Federal_da_Para%C3%ADba_-_Marca_Vertical_2015.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail">
+  <link rel="stylesheet" href="style-index.css">
+  <link rel="stylesheet" href="css/institutional.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Roboto:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/enhancements.css">
+  <link rel="stylesheet" href="css/dark.css">
+  <link rel="stylesheet" href="css/assistant.css">
+</head>
+<body>
+  <!-- Área principal usa a classe container para limitar e centralizar o conteúdo. -->
+  <main class="container">
+    <!-- Identificação visual do instituto. -->
+    <header class="header">
+      <div class="logo">
+        <div class="logo-icon">IFPB</div>
+        <div class="logo-text">
+          <strong>Instituto Federal</strong>
+          <span>Paraíba</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Apresentação do portal, título principal e breve orientação. -->
+    <section class="hero">
+      <span class="tag">CENTRO DE FUNCIONALIDADES</span>
+      <h1>
+        Acesse as ferramentas<br>
+        do seu <span>curso</span>
+      </h1>
+      <p>
+        Encontre rapidamente as funcionalidades e recursos
+        disponíveis para o seu curso.
+      </p>
+    </section>
+
+    <!-- Cada cartão é um link completo para a página de acesso ao curso. -->
+    <section class="courses">
+      <a class="course-card" href="./html/login.html?curso=informatica">
+        <div class="course-icon">
+          <i class="fa-solid fa-computer" aria-hidden="true"></i>
+        </div>
+        <div class="course-content">
+          <span class="course-label">CURSO</span>
+          <h2>Informática</h2>
+          <p>
+            Acesse as funcionalidades e ferramentas
+            disponíveis para o curso de Informática.
+          </p>
+          <span class="course-button">
+            Acessar
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </span>
+        </div>
+      </a>
+
+      <a class="course-card" href="./html/login-ser.html?curso=ser">
+        <div class="course-icon">
+          <i class="fa-solid fa-gears" aria-hidden="true"></i>
+        </div>
+        <div class="course-content">
+          <span class="course-label">CURSO</span>
+          <h2>S.E.R</h2>
+          <p>
+            Acesse as funcionalidades e ferramentas
+            disponíveis para o curso de S.E.R.
+          </p>
+          <span class="course-button">
+            Acessar
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </span>
+        </div>
+      </a>
+    </section>
+
+    <!-- Resumo do que o portal oferece depois do acesso. -->
+    <section class="features" aria-labelledby="features-title">
+      <h2 id="features-title">O que você encontra aqui</h2>
+      <p>Ferramentas pensadas para organizar a rotina de estudos.</p>
+      <div class="features-grid">
+        <article class="feature"><i class="fa-solid fa-calculator" aria-hidden="true"></i><h3>Cálculo de médias</h3><p>Simule notas e veja quanto falta para a aprovação.</p></article>
+        <article class="feature"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i><h3>Preparação para provas</h3><p>Cronograma por dificuldade, foco 25/5 e exportação para o calendário.</p></article>
+        <article class="feature"><i class="fa-solid fa-list-check" aria-hidden="true"></i><h3>Planilha de estudos</h3><p>Tarefas e metas diárias salvas no seu navegador.</p></article>
+        <article class="feature"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i><h3>Horários e matrizes</h3><p>PDFs do campus a um clique de distância.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Informações institucionais e acesso ao portal oficial do IFPB. -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="footer-logo" aria-hidden="true">IFPB</div>
+        <div>
+          <strong>Instituto Federal da Paraíba</strong>
+          <p>Educação pública, gratuita e de qualidade.</p>
+        </div>
+      </div>
+
+      <div class="footer-details">
+        <h2>Instituição</h2>
+        <p>Instituto Federal de Educação, Ciência e Tecnologia da Paraíba</p>
+        <p class="footer-location">Campus Santa Luzia — Santa Luzia, PB</p>
+      </div>
+
+      <div class="footer-portal">
+        <h2>Portal institucional</h2>
+        <p>Conheça os cursos, serviços e informações oficiais do IFPB.</p>
+        <a href="https://www.ifpb.edu.br/" target="_blank" rel="noopener noreferrer">
+          Acessar o portal do IFPB
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Centro de Funcionalidades</span>
+      <span>Projeto acadêmico de apoio à comunidade estudantil.</span>
+    </div>
+  </footer>
+  <script src="JS/enhancements.js" defer></script>
+  <script src="JS/assistant.js" defer></script>
+</body>
+</html>
